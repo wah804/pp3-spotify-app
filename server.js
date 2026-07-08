@@ -1,10 +1,20 @@
 const express = require('express');
 const cors = require('cors');
 const crypto = require('crypto');
+const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
 require('dotenv').config();
+
+const User = require('./models/User');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+// Connect to MongoDB
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/spotify_harmony';
+mongoose.connect(MONGODB_URI)
+  .then(() => console.log('Successfully connected to MongoDB.'))
+  .catch(err => console.error('MongoDB connection error:', err));
 
 // Enable CORS
 app.use(cors());
@@ -118,13 +128,80 @@ app.get('/api/callback', async (req, res) => {
     const data = await response.json();
 
     if (response.ok) {
-      // In Week 3, this will redirect the user to the frontend dashboard.
-      // For now, return the tokens directly as a JSON response.
+      // Fetch user profile from Spotify using the access token
+      const profileResponse = await fetch('https://api.spotify.com/v1/me', {
+        headers: {
+          'Authorization': `Bearer ${data.access_token}`
+        }
+      });
+      
+      let spotifyId = 'free_dev_fallback_user';
+      let displayName = 'Spotify Harmony Free Dev';
+      let email = 'free-dev@localhost';
+      
+      if (profileResponse.ok) {
+        const profileData = await profileResponse.json();
+        spotifyId = profileData.id;
+        displayName = profileData.display_name || '';
+        email = profileData.email || '';
+      } else if (profileResponse.status === 403) {
+        // Fallback for Spotify Free Developer accounts which are blocked from Web API requests
+        console.warn('Spotify profile fetch returned 403 (Premium Required for App Owner). Using local fallback profile for database and JWT persistence.');
+      } else {
+        const errorBody = await profileResponse.text();
+        console.error(`Spotify profile fetch error. Status: ${profileResponse.status}. Body:`, errorBody);
+        throw new Error(`Failed to fetch user profile from Spotify. Status: ${profileResponse.status}. Body: ${errorBody}`);
+      }
+
+      
+      // Calculate token expiration date
+      const tokenExpiresAt = new Date(Date.now() + data.expires_in * 1000);
+      
+      // Find or update the user in MongoDB
+      let user = await User.findOne({ spotifyId });
+      
+      if (user) {
+        user.accessToken = data.access_token;
+        user.refreshToken = data.refresh_token;
+        user.tokenExpiresAt = tokenExpiresAt;
+        user.displayName = displayName;
+        user.email = email;
+        await user.save();
+      } else {
+        user = new User({
+          spotifyId,
+          displayName,
+          email,
+          accessToken: data.access_token,
+          refreshToken: data.refresh_token,
+          tokenExpiresAt
+        });
+        await user.save();
+      }
+      
+      // Generate a signed JWT
+      const jwtToken = jwt.sign(
+        { userId: user._id, spotifyId: user.spotifyId },
+        process.env.JWT_SECRET || 'fallback_secret',
+        { expiresIn: '24h' }
+      );
+      
+      // Return the JWT along with user details and tokens
       res.json({
-        access_token: data.access_token,
-        refresh_token: data.refresh_token,
-        expires_in: data.expires_in,
-        scope: data.scope
+        message: 'Authentication successful',
+        jwt: jwtToken,
+        user: {
+          id: user._id,
+          spotifyId: user.spotifyId,
+          displayName: user.displayName,
+          email: user.email
+        },
+        spotifyTokens: {
+          access_token: data.access_token,
+          refresh_token: data.refresh_token,
+          expires_in: data.expires_in,
+          scope: data.scope
+        }
       });
     } else {
       res.status(response.status).json(data);
