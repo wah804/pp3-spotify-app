@@ -55,10 +55,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     spotifyId: localStorage.getItem('spotify_spotifyId') || '',
     currentTimeRange: 'medium_term',
     activeSearchType: 'track,artist,album',
-    searchDebounceTimer: null,
-    currentTrackPlaying: null,
-    loadedTracks: [],
-    loadedArtists: []
+    searchDebounceTimer: null
   };
 
   // Mock / Fallback Datasets (used when direct Spotify API is restricted or in offline demo mode)
@@ -289,8 +286,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       tracks = fallbackTracks;
     }
 
-    state.loadedArtists = artists;
-    state.loadedTracks = tracks;
+
 
     // Render Overview & Top Music Sections
     renderOverview(tracks, artists);

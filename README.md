@@ -83,21 +83,21 @@ The following sections define our milestones and tickets across the 4-week cours
 
 ### Milestone 2: Week 2 – Spotify Authentication & API Routing
 *Goal: Establish secure OAuth2 connection with Spotify and create backend wrapper routes.*
-- [ ] **Ticket PP3-2.1**: Set up Spotify Developer Dashboard configuration and credentials.
-- [ ] **Ticket PP3-2.2**: Implement OAuth2 Authorization Code Flow endpoint handlers (`/api/login`, `/api/callback`).
-- [ ] **Ticket PP3-2.3**: Build backend endpoints for Spotify search (`/api/search`) and profile details (`/api/me`).
-- [ ] **Ticket PP3-2.4**: Implement access token refresh flow to maintain user sessions seamlessly.
+- [x] **Ticket PP3-2.1**: Set up Spotify Developer Dashboard configuration and credentials.
+- [x] **Ticket PP3-2.2**: Implement OAuth2 Authorization Code Flow endpoint handlers (`/api/login`, `/api/callback`).
+- [x] **Ticket PP3-2.3**: Build backend endpoints for Spotify search (`/api/search`) and profile details (`/api/me`).
+- [x] **Ticket PP3-2.4**: Implement access token refresh flow to maintain user sessions seamlessly.
 
 ### Milestone 3: Week 3 – Frontend Integration & Dashboard UI
 *Goal: Build an elegant user interface to communicate with backend APIs.*
-- [ ] **Ticket PP3-3.1**: Build landing screen and Spotify login authorization button.
-- [ ] **Ticket PP3-3.2**: Develop Dashboard UI showing user top artists and listening statistics.
-- [ ] **Ticket PP3-3.3**: Create interactive search component to preview and select tracks.
-- [ ] **Ticket PP3-3.4**: Integrate visualizations representing track audio feature analysis.
+- [x] **Ticket PP3-3.1**: Build landing screen and Spotify login authorization button.
+- [x] **Ticket PP3-3.2**: Develop Dashboard UI showing user top artists and listening statistics.
+- [x] **Ticket PP3-3.3**: Create interactive search component to preview and select tracks.
+- [x] **Ticket PP3-3.4**: Integrate visualizations representing track audio feature analysis.
 
 ### Milestone 4: Week 4 – Staging Deployment, Testing & Polish
 *Goal: Deploy working application, test functionality, and polish UX/UI.*
-- [ ] **Ticket PP3-4.1**: Set up unit/integration tests for server endpoints.
-- [ ] **Ticket PP3-4.2**: Configure production deployment (e.g. Render / Railway).
+- [x] **Ticket PP3-4.1**: Set up unit/integration tests for server endpoints.
+- [x] **Ticket PP3-4.2**: Configure production deployment (e.g. Render / Railway).
 - [ ] **Ticket PP3-4.3**: Perform performance and accessibility (a11y) audits.
-- [ ] **Ticket PP3-4.4**: Conduct code cleanup, final repository polish, and submission checks.
+- [x] **Ticket PP3-4.4**: Conduct code cleanup, final repository polish, and submission checks.
