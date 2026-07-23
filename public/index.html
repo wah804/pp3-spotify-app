@@ -14,150 +14,486 @@
   <!-- Styling -->
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="theme-guest">
-  <!-- Glowing Background Orbs -->
+<body class="state-logged-out">
+  <!-- Ambient Background Glow Orbs -->
   <div class="glow-orb orb-1" aria-hidden="true"></div>
   <div class="glow-orb orb-2" aria-hidden="true"></div>
   <div class="glow-orb orb-3" aria-hidden="true"></div>
 
-  <!-- Main Navigation -->
-  <header class="app-header">
-    <div class="header-container">
-      <a href="/" class="brand-logo" id="brand-logo">
-        <svg class="logo-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
-          <path d="M7 9C9 7.5 15 7.5 17 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          <path d="M8 12C9.5 10.8 14.5 10.8 16 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          <path d="M9 15C10.2 14.2 13.8 14.2 15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-        <span class="brand-name">Spotify Harmony</span>
-      </a>
-      <nav class="nav-links">
-        <a href="#features" class="nav-link">Features</a>
-        <a href="#about" class="nav-link">About</a>
-      </nav>
-      <div class="header-actions">
-        <!-- Dynamically toggled buttons -->
-        <a href="/api/login" class="btn btn-yellow btn-sm" id="nav-login-btn">Connect Spotify</a>
-        <button class="btn btn-outline btn-sm hidden" id="nav-logout-btn">Disconnect</button>
+  <!-- ========================================== -->
+  <!-- 1. DEFAULT LOGIN SCREEN (UNAUTHENTICATED)  -->
+  <!-- ========================================== -->
+  <div class="view-container" id="login-screen">
+    <header class="guest-header">
+      <div class="header-container">
+        <a href="/" class="brand-logo">
+          <svg class="logo-icon" viewBox="0 0 24 24" fill="currentColor">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
+            <path d="M7 9C9 7.5 15 7.5 17 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M8 12C9.5 10.8 14.5 10.8 16 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M9 15C10.2 14.2 13.8 14.2 15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <span class="brand-name">Spotify Harmony</span>
+        </a>
+        <div class="server-status-pill" id="server-status-indicator">
+          <span class="status-dot dot-connecting"></span>
+          <span class="status-text">Verifying API Status...</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="login-main-content">
+      <section class="login-hero">
+        <div class="hero-container">
+          <div class="hero-badge">
+            <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            Spotify OAuth2 & JWT Secured
+          </div>
+
+          <h1 class="hero-title">
+            Unlock Your Spotify <span class="text-gradient">Harmony</span>
+          </h1>
+
+          <p class="hero-subtitle">
+            Authorize your Spotify account to receive a secure JWT token. Experience custom listening statistics, top artist metrics, catalog searching, and acoustic trait profiling.
+          </p>
+
+          <div class="login-cta-wrapper">
+            <a href="/api/login" class="btn btn-spotify btn-lg btn-glow" id="authorize-spotify-btn">
+              <svg class="spotify-logo-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.565.387-.86.207-2.377-1.454-5.37-1.783-8.894-.982-.336.076-.67-.138-.746-.474-.076-.336.138-.67.474-.746 3.856-.88 7.15-.506 9.817 1.13.295.18.387.565.207.865zm1.226-2.726c-.226.367-.707.487-1.074.26-2.72-1.673-6.87-2.158-10.077-1.183-.413.125-.85-.107-.975-.52-.125-.413.107-.85.52-.975 3.666-1.112 8.23-.574 11.347 1.34.367.227.487.708.26 1.075v.003zm.107-2.846C14.453 8.71 8.733 8.52 5.415 9.53c-.51.155-1.047-.135-1.2-.647-.154-.512.135-1.047.647-1.2 3.82-1.16 10.13-.943 14.14 1.44.46.273.61.87.337 1.33-.273.46-.87.61-1.33.337z"/>
+              </svg>
+              Authorize Spotify Account
+            </a>
+          </div>
+
+          <div class="security-note">
+            <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            Tokens are safely stored locally in your browser. Unauthenticated access is enforced.
+          </div>
+        </div>
+      </section>
+
+      <!-- Feature Teasers -->
+      <section class="login-features">
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon text-spotify">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+              </svg>
+            </div>
+            <h3>Top Artists & Tracks</h3>
+            <p>Analyze your listening habits across 4-week, 6-month, and all-time horizons.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon text-cyan">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+            </div>
+            <h3>Catalog Search</h3>
+            <p>Search millions of tracks, artists, and albums with real-time audio playback previews.</p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon text-amber">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 3.055A9.003 9.003 0 1020.945 13H11V3.055z"></path>
+                <path d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
+              </svg>
+            </div>
+            <h3>Acoustic Profiler</h3>
+            <p>Visualize valence (happiness), danceability, energy, tempo, and acousticness metrics.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="guest-footer">
+      <p>&copy; 2026 Spotify Harmony. Built for Portfolio Project 3. Powered by Spotify Web API & Express JWT.</p>
+    </footer>
+  </div>
+
+
+  <!-- ========================================== -->
+  <!-- 2. MAIN APP DASHBOARD (AUTHENTICATED)      -->
+  <!-- ========================================== -->
+  <div class="view-container hidden" id="app-dashboard">
+    <!-- Navigation Bar -->
+    <header class="app-header">
+      <div class="header-container">
+        <a href="#" class="brand-logo">
+          <svg class="logo-icon" viewBox="0 0 24 24" fill="currentColor">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
+            <path d="M7 9C9 7.5 15 7.5 17 9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M8 12C9.5 10.8 14.5 10.8 16 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M9 15C10.2 14.2 13.8 14.2 15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <span class="brand-name">Spotify Harmony</span>
+        </a>
+
+        <nav class="main-nav">
+          <button class="nav-tab active" id="tab-overview" data-target="view-overview">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+            Overview
+          </button>
+
+          <button class="nav-tab" id="tab-top-music" data-target="view-top-music">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+            </svg>
+            Top Music
+          </button>
+
+          <button class="nav-tab" id="tab-search" data-target="view-search">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            Catalog Search
+          </button>
+
+          <button class="nav-tab" id="tab-profiler" data-target="view-profiler">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="20" x2="18" y2="10"></line>
+              <line x1="12" y1="20" x2="12" y2="4"></line>
+              <line x1="6" y1="20" x2="6" y2="14"></line>
+            </svg>
+            Acoustic Profiler
+          </button>
+        </nav>
+
+        <div class="user-profile-header">
+          <div class="user-pill">
+            <div class="user-avatar" id="header-avatar">
+              <span id="header-avatar-letter">S</span>
+            </div>
+            <div class="user-info">
+              <span class="user-name" id="header-display-name">Spotify User</span>
+              <span class="session-badge"><span class="badge-dot"></span> Authorized</span>
+            </div>
+          </div>
+          <button class="btn btn-outline-danger btn-sm" id="logout-btn" title="Log out and clear session token">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+              <polyline points="16 17 21 12 16 7"></polyline>
+              <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+            Disconnect
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="dashboard-main">
+      
+      <!-- VIEW 1: OVERVIEW -->
+      <section class="dashboard-view active" id="view-overview">
+        <div class="welcome-banner">
+          <div class="welcome-text">
+            <h2>Welcome Back, <span class="text-gradient" id="welcome-user-name">Listener</span>! 👋</h2>
+            <p>Your Spotify session is active with valid JWT authentication. Explore your listening stats below.</p>
+          </div>
+          <div class="quick-token-badge">
+            <span class="jwt-shield">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+              JWT Session Validated
+            </span>
+          </div>
+        </div>
+
+        <!-- Metrics Grid -->
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-title">Top Musical Vibe</span>
+              <div class="metric-icon icon-spotify">⚡</div>
+            </div>
+            <div class="metric-value" id="overview-top-vibe">High Energy Pop</div>
+            <div class="metric-sub">Based on recent listening habits</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-title">Track Valence</span>
+              <div class="metric-icon icon-amber">😊</div>
+            </div>
+            <div class="metric-value" id="overview-valence">78% Positive</div>
+            <div class="metric-sub">Overall mood score</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-title">Average Tempo</span>
+              <div class="metric-icon icon-cyan">🥁</div>
+            </div>
+            <div class="metric-value" id="overview-tempo">124 BPM</div>
+            <div class="metric-sub">Upbeat rhythm preference</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-header">
+              <span class="metric-title">Spotify Account ID</span>
+              <div class="metric-icon icon-purple">👤</div>
+            </div>
+            <div class="metric-value value-sm" id="overview-spotify-id">Loading...</div>
+            <div class="metric-sub">Linked Spotify account</div>
+          </div>
+        </div>
+
+        <!-- Overview Content Split -->
+        <div class="overview-grid">
+          <!-- Recent Top Tracks Showcase -->
+          <div class="card-panel">
+            <div class="panel-header">
+              <h3>🔥 Top Tracks Spotlight</h3>
+              <button class="link-btn" onclick="switchNavTab('tab-top-music')">View All &rarr;</button>
+            </div>
+            <div class="tracks-list-compact" id="overview-tracks-list">
+              <div class="skeleton-loader">Loading spotlight tracks...</div>
+            </div>
+          </div>
+
+          <!-- Top Artists Showcase -->
+          <div class="card-panel">
+            <div class="panel-header">
+              <h3>🌟 Favorite Artists</h3>
+              <button class="link-btn" onclick="switchNavTab('tab-top-music')">View All &rarr;</button>
+            </div>
+            <div class="artists-grid-compact" id="overview-artists-list">
+              <div class="skeleton-loader">Loading favorite artists...</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 2: TOP MUSIC -->
+      <section class="dashboard-view" id="view-top-music">
+        <div class="section-controls">
+          <div class="section-title-wrapper">
+            <h2>Your Top Music Analytics</h2>
+            <p>Explore your most played artists and tracks over time.</p>
+          </div>
+
+          <!-- Time Horizon Filters -->
+          <div class="filter-group">
+            <span class="filter-label">Time Horizon:</span>
+            <div class="time-range-pills">
+              <button class="pill-btn active" data-time-range="short_term">4 Weeks</button>
+              <button class="pill-btn" data-time-range="medium_term">6 Months</button>
+              <button class="pill-btn" data-time-range="long_term">All Time</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub-tabs for Artists vs Tracks -->
+        <div class="sub-tabs-bar">
+          <button class="sub-tab active" id="subtab-artists" data-target="content-artists">
+            Top Artists
+          </button>
+          <button class="sub-tab" id="subtab-tracks" data-target="content-tracks">
+            Top Tracks
+          </button>
+        </div>
+
+        <!-- Sub-tab Content: Artists -->
+        <div class="subtab-content active" id="content-artists">
+          <div class="artists-grid" id="top-artists-container">
+            <div class="skeleton-loader">Loading top artists...</div>
+          </div>
+        </div>
+
+        <!-- Sub-tab Content: Tracks -->
+        <div class="subtab-content hidden" id="content-tracks">
+          <div class="tracks-table-container">
+            <div class="tracks-list" id="top-tracks-container">
+              <div class="skeleton-loader">Loading top tracks...</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 3: CATALOG SEARCH -->
+      <section class="dashboard-view" id="view-search">
+        <div class="search-header-container">
+          <h2>Search Spotify Catalog</h2>
+          <p>Query millions of tracks, artists, and albums in real-time.</p>
+          
+          <div class="search-bar-wrapper">
+            <div class="search-input-box">
+              <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <input type="text" id="search-input" placeholder="Search by song name, artist, or album..." autocomplete="off">
+              <button class="clear-search-btn hidden" id="clear-search-btn">&times;</button>
+            </div>
+
+            <!-- Type Filters -->
+            <div class="search-type-filters">
+              <button class="chip-btn active" data-type="track,artist,album">All</button>
+              <button class="chip-btn" data-type="track">Tracks</button>
+              <button class="chip-btn" data-type="artist">Artists</button>
+              <button class="chip-btn" data-type="album">Albums</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Search Results Container -->
+        <div class="search-results-area" id="search-results-container">
+          <div class="search-placeholder-state">
+            <div class="placeholder-icon">🔍</div>
+            <h3>Discover New Music</h3>
+            <p>Type a search query above to explore tracks and preview audio samples.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 4: ACOUSTIC PROFILER -->
+      <section class="dashboard-view" id="view-profiler">
+        <div class="profiler-header">
+          <h2>Acoustic Trait Visualizer</h2>
+          <p>An in-depth breakdown of the acoustic DNA and audio metrics in your top tracks.</p>
+        </div>
+
+        <div class="profiler-grid">
+          <!-- Mood Personality Card -->
+          <div class="card-panel mood-card">
+            <div class="mood-badge">Music Mood Persona</div>
+            <h3 class="mood-title" id="mood-persona-title">Vibrant & High Energy</h3>
+            <p class="mood-desc" id="mood-persona-desc">
+              Your listening profile exhibits high valence and strong danceability. You tend to favor upbeat, rhythmic productions with positive emotional resonance.
+            </p>
+            <div class="mood-tags">
+              <span class="mood-tag">#Upbeat</span>
+              <span class="mood-tag">#Danceable</span>
+              <span class="mood-tag">#PositiveValence</span>
+            </div>
+          </div>
+
+          <!-- Trait Bars Card -->
+          <div class="card-panel traits-card">
+            <h3>Acoustic Audio Attributes</h3>
+            
+            <div class="traits-list">
+              <!-- Trait 1: Valence -->
+              <div class="trait-item">
+                <div class="trait-info">
+                  <span class="trait-name">Valence (Happiness)</span>
+                  <span class="trait-value" id="trait-val-valence">78%</span>
+                </div>
+                <div class="trait-bar-track">
+                  <div class="trait-bar-fill fill-spotify" id="trait-bar-valence" style="width: 78%;"></div>
+                </div>
+              </div>
+
+              <!-- Trait 2: Danceability -->
+              <div class="trait-item">
+                <div class="trait-info">
+                  <span class="trait-name">Danceability</span>
+                  <span class="trait-value" id="trait-val-danceability">84%</span>
+                </div>
+                <div class="trait-bar-track">
+                  <div class="trait-bar-fill fill-cyan" id="trait-bar-danceability" style="width: 84%;"></div>
+                </div>
+              </div>
+
+              <!-- Trait 3: Energy -->
+              <div class="trait-item">
+                <div class="trait-info">
+                  <span class="trait-name">Energy</span>
+                  <span class="trait-value" id="trait-val-energy">72%</span>
+                </div>
+                <div class="trait-bar-track">
+                  <div class="trait-bar-fill fill-amber" id="trait-bar-energy" style="width: 72%;"></div>
+                </div>
+              </div>
+
+              <!-- Trait 4: Acousticness -->
+              <div class="trait-item">
+                <div class="trait-info">
+                  <span class="trait-name">Acousticness</span>
+                  <span class="trait-value" id="trait-val-acousticness">26%</span>
+                </div>
+                <div class="trait-bar-track">
+                  <div class="trait-bar-fill fill-purple" id="trait-bar-acousticness" style="width: 26%;"></div>
+                </div>
+              </div>
+
+              <!-- Trait 5: Speechiness -->
+              <div class="trait-item">
+                <div class="trait-info">
+                  <span class="trait-name">Speechiness</span>
+                  <span class="trait-value" id="trait-val-speechiness">18%</span>
+                </div>
+                <div class="trait-bar-track">
+                  <div class="trait-bar-fill fill-rose" id="trait-bar-speechiness" style="width: 18%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Audio Player Bar (Persistent Audio Drawer) -->
+    <div class="audio-player-bar hidden" id="audio-player-bar">
+      <div class="player-container">
+        <div class="player-track-info">
+          <img src="" alt="Album Cover" class="player-cover" id="player-cover-img">
+          <div class="player-text">
+            <div class="player-title" id="player-track-title">Track Title</div>
+            <div class="player-artist" id="player-track-artist">Artist Name</div>
+          </div>
+        </div>
+
+        <div class="player-controls">
+          <button class="player-btn" id="player-play-btn" title="Play / Pause">
+            <svg class="play-icon" id="player-play-icon" viewBox="0 0 24 24" fill="currentColor">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            <svg class="pause-icon hidden" id="player-pause-icon" viewBox="0 0 24 24" fill="currentColor">
+              <rect x="6" y="4" width="4" height="16"></rect>
+              <rect x="14" y="4" width="4" height="16"></rect>
+            </svg>
+          </button>
+          <div class="player-progress-wrapper">
+            <span class="time-text" id="player-current-time">0:00</span>
+            <div class="progress-bar-track" id="player-progress-track">
+              <div class="progress-bar-fill" id="player-progress-fill"></div>
+            </div>
+            <span class="time-text" id="player-duration">0:30</span>
+          </div>
+        </div>
+
+        <button class="close-player-btn" id="close-player-btn" title="Close Player">&times;</button>
       </div>
     </div>
-  </header>
 
-  <!-- Hero Section -->
-  <main class="main-content">
-    
-    <!-- Guest View Hero -->
-    <section class="hero-section" id="guest-hero-section">
-      <div class="hero-container">
-        <div class="hero-badge">Dynamic Music Analytics</div>
-        <h1 class="hero-title">Discover Your Listeners' <span class="text-gradient">Harmony</span></h1>
-        <p class="hero-subtitle">
-          Unveil the hidden architecture of your music taste. Analyze valence, energy, acousticness, and tempo metrics of your top tracks with our premium analytics dashboard.
-        </p>
-        <div class="hero-actions">
-          <a href="/api/login" class="btn btn-yellow btn-lg btn-glow" id="hero-connect-btn">
-            <svg class="btn-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.565.387-.86.207-2.377-1.454-5.37-1.783-8.894-.982-.336.076-.67-.138-.746-.474-.076-.336.138-.67.474-.746 3.856-.88 7.15-.506 9.817 1.13.295.18.387.565.207.865zm1.226-2.726c-.226.367-.707.487-1.074.26-2.72-1.673-6.87-2.158-10.077-1.183-.413.125-.85-.107-.975-.52-.125-.413.107-.85.52-.975 3.666-1.112 8.23-.574 11.347 1.34.367.227.487.708.26 1.075v.003zm.107-2.846C14.453 8.71 8.733 8.52 5.415 9.53c-.51.155-1.047-.135-1.2-.647-.154-.512.135-1.047.647-1.2 3.82-1.16 10.13-.943 14.14 1.44.46.273.61.87.337 1.33-.273.46-.87.61-1.33.337z"/>
-            </svg>
-            Connect Spotify Account
-          </a>
-        </div>
-      </div>
-    </section>
+    <!-- Hidden HTML5 Audio Element -->
+    <audio id="global-audio-element" preload="none"></audio>
+  </div>
 
-    <!-- Authenticated View Hero -->
-    <section class="hero-section hidden" id="auth-hero-section">
-      <div class="hero-container">
-        <div class="hero-badge badge-auth">Active Session Authorized</div>
-        <h1 class="hero-title">Welcome Back, <span class="text-gradient" id="user-display-name">Music Listener</span></h1>
-        <p class="hero-subtitle">
-          Your Spotify account is successfully linked. Ready to dive into your personalized analytics, top artists, and musical profiles?
-        </p>
-        
-        <!-- User Profile Card -->
-        <div class="profile-card" id="user-profile-card">
-          <div class="profile-header">
-            <div class="profile-avatar" id="user-avatar-placeholder">
-              <span id="user-avatar-letter">H</span>
-            </div>
-            <div class="profile-details">
-              <h3 class="profile-name" id="profile-name-text">Spotify Listener</h3>
-              <p class="profile-meta">Spotify ID: <span id="user-spotify-id">Loading...</span></p>
-            </div>
-            <div class="profile-status">
-              <span class="status-indicator"></span>
-              Connected
-            </div>
-          </div>
-        </div>
+  <!-- Toast Container -->
+  <div id="toast-container" aria-live="polite"></div>
 
-        <div class="hero-actions">
-          <button class="btn btn-yellow btn-lg btn-glow" id="enter-dashboard-btn">
-            Enter Harmony Dashboard
-          </button>
-          <button class="btn btn-outline btn-lg" id="logout-btn">
-            Disconnect Account
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features-section" id="features">
-      <div class="section-header">
-        <h2 class="section-title">Harmonizing Data & Sound</h2>
-        <p class="section-subtitle">Spotify Harmony bridges the gap between your listening habits and acoustic metadata.</p>
-      </div>
-
-      <div class="features-grid">
-        <!-- Feature 1 -->
-        <div class="feature-card" id="feature-habits">
-          <div class="feature-icon-wrapper text-accent">
-            <svg class="feature-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
-            </svg>
-          </div>
-          <h3 class="feature-title">Top Artists & Tracks</h3>
-          <p class="feature-desc">Discover your most-played tracks, albums, and artists across different time ranges (short, medium, and long-term habits).</p>
-        </div>
-
-        <!-- Feature 2 -->
-        <div class="feature-card" id="feature-search">
-          <div class="feature-icon-wrapper text-accent">
-            <svg class="feature-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
-          </div>
-          <h3 class="feature-title">Smart Catalog Search</h3>
-          <p class="feature-desc">Instantly query Spotify's catalog of millions of tracks. View dynamic album art and play metadata details directly.</p>
-        </div>
-
-        <!-- Feature 3 -->
-        <div class="feature-card" id="feature-analytics">
-          <div class="feature-icon-wrapper text-accent">
-            <svg class="feature-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M11 3.055A9.003 9.003 0 1020.945 13H11V3.055z"></path>
-              <path stroke-linecap="round" stroke-linejoin="round" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
-            </svg>
-          </div>
-          <h3 class="feature-title">Acoustic Profiler</h3>
-          <p class="feature-desc">Extract valence (happiness), energy, danceability, tempo, and acousticness metrics to chart your true musical mood profile.</p>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- Footer -->
-  <footer class="app-footer">
-    <div class="footer-container">
-      <p class="copyright">&copy; 2026 Spotify Harmony. All rights reserved.</p>
-      <p class="disclaimer">Not affiliated with Spotify AB. Built for educational portfolio projects.</p>
-    </div>
-  </footer>
-
-  <!-- Script -->
+  <!-- Main JavaScript App -->
   <script src="app.js"></script>
 </body>
 </html>
