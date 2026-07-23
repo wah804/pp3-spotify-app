@@ -348,8 +348,8 @@
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
               </svg>
-              <input type="text" id="search-input" placeholder="Search by song name, artist, or album..." autocomplete="off">
-              <button class="clear-search-btn hidden" id="clear-search-btn">&times;</button>
+              <input type="text" id="search-input" placeholder="Search by song name, artist, or album..." autocomplete="off" aria-label="Search Spotify catalog">
+              <button class="clear-search-btn hidden" id="clear-search-btn" aria-label="Clear search input">&times;</button>
             </div>
 
             <!-- Type Filters -->
@@ -474,7 +474,7 @@
         </div>
 
         <div class="player-controls">
-          <button class="player-btn" id="player-play-btn" title="Play / Pause">
+          <button class="player-btn" id="player-play-btn" title="Play / Pause" aria-label="Play or pause audio">
             <svg class="play-icon" id="player-play-icon" viewBox="0 0 24 24" fill="currentColor">
               <polygon points="5 3 19 12 5 21 5 3"></polygon>
             </svg>
@@ -492,7 +492,7 @@
           </div>
         </div>
 
-        <button class="close-player-btn" id="close-player-btn" title="Close Player">&times;</button>
+        <button class="close-player-btn" id="close-player-btn" title="Close Player" aria-label="Close audio player">&times;</button>
       </div>
     </div>
 

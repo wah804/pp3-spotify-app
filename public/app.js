@@ -307,7 +307,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           <div class="track-title-sm">${escapeHtml(track.title)}</div>
           <div class="track-artist-sm">${escapeHtml(track.artist)}</div>
         </div>
-        <button class="play-preview-btn" onclick="playAudioPreview('${escapeHtml(track.preview)}', '${escapeHtml(track.title)}', '${escapeHtml(track.artist)}', '${escapeHtml(track.cover)}')">
+        <button class="play-preview-btn" onclick="playAudioPreview('${escapeHtml(track.preview)}', '${escapeHtml(track.title)}', '${escapeHtml(track.artist)}', '${escapeHtml(track.cover)}')" aria-label="Play preview for ${escapeHtml(track.title)} by ${escapeHtml(track.artist)}">
           <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
         </button>
       </div>
@@ -348,7 +348,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           <div class="track-artist-main">${escapeHtml(track.artist)}</div>
         </div>
         <div class="track-album-name">${escapeHtml(track.album)}</div>
-        <button class="play-preview-btn" onclick="playAudioPreview('${escapeHtml(track.preview)}', '${escapeHtml(track.title)}', '${escapeHtml(track.artist)}', '${escapeHtml(track.cover)}')">
+        <button class="play-preview-btn" onclick="playAudioPreview('${escapeHtml(track.preview)}', '${escapeHtml(track.title)}', '${escapeHtml(track.artist)}', '${escapeHtml(track.cover)}')" aria-label="Play preview for ${escapeHtml(track.title)} by ${escapeHtml(track.artist)}">
           <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
         </button>
       </div>
@@ -421,7 +421,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <div class="track-artist-main">${escapeHtml(artist)}</div>
                   </div>
                   <div class="track-album-name">${escapeHtml(album)}</div>
-                  <button class="play-preview-btn" onclick="playAudioPreview('${escapeHtml(preview)}', '${escapeHtml(title)}', '${escapeHtml(artist)}', '${escapeHtml(cover)}')">
+                  <button class="play-preview-btn" onclick="playAudioPreview('${escapeHtml(preview)}', '${escapeHtml(title)}', '${escapeHtml(artist)}', '${escapeHtml(cover)}')" aria-label="Play preview for ${escapeHtml(title)} by ${escapeHtml(artist)}">
                     <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                   </button>
                 </div>
@@ -446,7 +446,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <div class="track-artist-main">${escapeHtml(t.artist)}</div>
                   </div>
                   <div class="track-album-name">${escapeHtml(t.album)}</div>
-                  <button class="play-preview-btn" onclick="playAudioPreview('${escapeHtml(t.preview)}', '${escapeHtml(t.title)}', '${escapeHtml(t.artist)}', '${escapeHtml(t.cover)}')">
+                  <button class="play-preview-btn" onclick="playAudioPreview('${escapeHtml(t.preview)}', '${escapeHtml(t.title)}', '${escapeHtml(t.artist)}', '${escapeHtml(t.cover)}')" aria-label="Play preview for ${escapeHtml(t.title)} by ${escapeHtml(t.artist)}">
                     <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                   </button>
                 </div>
