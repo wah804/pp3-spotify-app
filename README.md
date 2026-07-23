@@ -99,5 +99,5 @@ The following sections define our milestones and tickets across the 4-week cours
 *Goal: Deploy working application, test functionality, and polish UX/UI.*
 - [x] **Ticket PP3-4.1**: Set up unit/integration tests for server endpoints.
 - [x] **Ticket PP3-4.2**: Configure production deployment (e.g. Render / Railway).
-- [ ] **Ticket PP3-4.3**: Perform performance and accessibility (a11y) audits.
+- [x] **Ticket PP3-4.3**: Perform performance and accessibility (a11y) audits.
 - [x] **Ticket PP3-4.4**: Conduct code cleanup, final repository polish, and submission checks.
