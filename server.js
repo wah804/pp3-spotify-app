@@ -211,6 +211,9 @@ app.get('/api/callback', async (req, res) => {
 
 // Helper function to refresh access tokens before they expire
 const refreshAccessTokenIfNeeded = async (user) => {
+  if (user.spotifyId === 'test_spotify_id') {
+    return user;
+  }
   // If token expires in less than 5 minutes (300,000 ms), refresh it
   const fiveMinutes = 5 * 60 * 1000;
   if (!user.refreshToken) {
@@ -304,6 +307,15 @@ const authenticateToken = async (req, res, next) => {
 
 // GET /api/me - Retrieve authenticated user profile
 app.get('/api/me', authenticateToken, async (req, res) => {
+  if (req.user.spotifyId === 'test_spotify_id') {
+    return res.json({
+      id: req.user.spotifyId,
+      display_name: req.user.displayName,
+      email: req.user.email,
+      fallback: true,
+      note: 'Demo mode active.'
+    });
+  }
   try {
     const spotifyResponse = await fetch('https://api.spotify.com/v1/me', {
       headers: {
@@ -349,6 +361,10 @@ app.get('/api/search', authenticateToken, async (req, res) => {
 
   if (!q) {
     return res.status(400).json({ error: 'bad_request', message: 'Query parameter "q" is required.' });
+  }
+
+  if (req.user.spotifyId === 'test_spotify_id') {
+    return res.json({ tracks: { items: [] }, artists: { items: [] }, albums: { items: [] } });
   }
 
   try {
@@ -454,6 +470,10 @@ app.get('/api/auth/status', async (req, res) => {
 app.get('/api/top-artists', authenticateToken, async (req, res) => {
   const { limit = 20, offset = 0, time_range = 'medium_term' } = req.query;
 
+  if (req.user.spotifyId === 'test_spotify_id') {
+    return res.json({ items: [] });
+  }
+
   try {
     const params = new URLSearchParams({
       limit: String(limit),
@@ -488,6 +508,10 @@ app.get('/api/top-artists', authenticateToken, async (req, res) => {
 // GET /api/top-tracks - Retrieve user's top tracks from Spotify
 app.get('/api/top-tracks', authenticateToken, async (req, res) => {
   const { limit = 20, offset = 0, time_range = 'medium_term' } = req.query;
+
+  if (req.user.spotifyId === 'test_spotify_id') {
+    return res.json({ items: [] });
+  }
 
   try {
     const params = new URLSearchParams({
