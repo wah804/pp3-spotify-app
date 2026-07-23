@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: spotify-harmony
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5005
+      - key: SPOTIFY_CLIENT_ID
+        sync: false
+        placeholder: "Get this from your Spotify Developer Dashboard"
+      - key: SPOTIFY_CLIENT_SECRET
+        sync: false
+        placeholder: "Get this from your Spotify Developer Dashboard"
+      - key: SPOTIFY_REDIRECT_URI
+        sync: false
+        placeholder: "e.g., https://spotify-harmony.onrender.com/api/callback"
+      - key: MONGODB_URI
+        sync: false
+        placeholder: "e.g., mongodb+srv://username:password@cluster.mongodb.net/database"
+      - key: JWT_SECRET
+        generateValue: true
