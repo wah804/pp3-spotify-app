@@ -613,6 +613,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .metric-icon {
   font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.metric-icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 .metric-value {
@@ -1127,6 +1135,15 @@ h1, h2, h3, h4, h5, h6 {
 .placeholder-icon {
   font-size: 3rem;
   margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.placeholder-icon svg {
+  width: 4rem;
+  height: 4rem;
+  color: var(--text-dim);
 }
 
 /* ==========================================================================

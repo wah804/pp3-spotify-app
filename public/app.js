@@ -390,7 +390,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (!query.trim()) {
       searchResultsContainer.innerHTML = `
         <div class="search-placeholder-state">
-          <div class="placeholder-icon">🔍</div>
+          <div class="placeholder-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
           <h3>Discover New Music</h3>
           <p>Type a search query above to explore tracks and preview audio samples.</p>
         </div>
@@ -458,7 +460,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         } else {
           searchResultsContainer.innerHTML = `
             <div class="search-placeholder-state">
-              <div class="placeholder-icon">🎵</div>
+              <div class="placeholder-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+              </div>
               <h3>No direct matches found</h3>
               <p>Try searching for popular artists like "The Weeknd", "Daft Punk", or "Dua Lipa".</p>
             </div>

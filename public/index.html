@@ -204,7 +204,7 @@
       <section class="dashboard-view active" id="view-overview">
         <div class="welcome-banner">
           <div class="welcome-text">
-            <h2>Welcome Back, <span class="text-gradient" id="welcome-user-name">Listener</span>! 👋</h2>
+            <h2>Welcome Back, <span class="text-gradient" id="welcome-user-name">Listener</span>!</h2>
             <p>Your Spotify session is active with valid JWT authentication. Explore your listening stats below.</p>
           </div>
           <div class="quick-token-badge">
@@ -222,7 +222,9 @@
           <div class="metric-card">
             <div class="metric-header">
               <span class="metric-title">Top Musical Vibe</span>
-              <div class="metric-icon icon-spotify">⚡</div>
+              <div class="metric-icon icon-spotify">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              </div>
             </div>
             <div class="metric-value" id="overview-top-vibe">High Energy Pop</div>
             <div class="metric-sub">Based on recent listening habits</div>
@@ -231,7 +233,9 @@
           <div class="metric-card">
             <div class="metric-header">
               <span class="metric-title">Track Valence</span>
-              <div class="metric-icon icon-amber">😊</div>
+              <div class="metric-icon icon-amber">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+              </div>
             </div>
             <div class="metric-value" id="overview-valence">78% Positive</div>
             <div class="metric-sub">Overall mood score</div>
@@ -240,7 +244,9 @@
           <div class="metric-card">
             <div class="metric-header">
               <span class="metric-title">Average Tempo</span>
-              <div class="metric-icon icon-cyan">🥁</div>
+              <div class="metric-icon icon-cyan">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              </div>
             </div>
             <div class="metric-value" id="overview-tempo">124 BPM</div>
             <div class="metric-sub">Upbeat rhythm preference</div>
@@ -249,7 +255,9 @@
           <div class="metric-card">
             <div class="metric-header">
               <span class="metric-title">Spotify Account ID</span>
-              <div class="metric-icon icon-purple">👤</div>
+              <div class="metric-icon icon-purple">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
             </div>
             <div class="metric-value value-sm" id="overview-spotify-id">Loading...</div>
             <div class="metric-sub">Linked Spotify account</div>
@@ -261,7 +269,7 @@
           <!-- Recent Top Tracks Showcase -->
           <div class="card-panel">
             <div class="panel-header">
-              <h3>🔥 Top Tracks Spotlight</h3>
+              <h3>Top Tracks Spotlight</h3>
               <button class="link-btn" onclick="switchNavTab('tab-top-music')">View All &rarr;</button>
             </div>
             <div class="tracks-list-compact" id="overview-tracks-list">
@@ -272,7 +280,7 @@
           <!-- Top Artists Showcase -->
           <div class="card-panel">
             <div class="panel-header">
-              <h3>🌟 Favorite Artists</h3>
+              <h3>Favorite Artists</h3>
               <button class="link-btn" onclick="switchNavTab('tab-top-music')">View All &rarr;</button>
             </div>
             <div class="artists-grid-compact" id="overview-artists-list">
@@ -357,7 +365,9 @@
         <!-- Search Results Container -->
         <div class="search-results-area" id="search-results-container">
           <div class="search-placeholder-state">
-            <div class="placeholder-icon">🔍</div>
+            <div class="placeholder-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </div>
             <h3>Discover New Music</h3>
             <p>Type a search query above to explore tracks and preview audio samples.</p>
           </div>
